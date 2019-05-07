@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { __values } from 'tslib';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Component, Input, ViewChild, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 /**
  * @fileoverview added by tsickle
@@ -15,7 +16,7 @@ var SevenSegComponent = /** @class */ (function () {
         this.width = 18;
         this.height = 42;
         this.color = 'black';
-        this.spacing = 0.5;
+        this.spacing = 1;
     }
     Object.defineProperty(SevenSegComponent.prototype, "digitState", {
         get: /**
@@ -472,7 +473,7 @@ var SevenSegCellComponent = /** @class */ (function () {
         ///////////////////////////////////////////////////////////////
         ///  Set size
         ///////////////////////////////////////////////////////////////
-        this.horizontalW = w - 1.5 * t;
+        this.horizontalW = w - 2 * t;
         this.horizontalH = t;
         try {
             for (var _q = __values('ADG'), _r = _q.next(); !_r.done; _r = _q.next()) {
@@ -534,7 +535,7 @@ var SevenSegCellComponent = /** @class */ (function () {
             // the segments on the right hand side (1)
             for (var _w = __values('BC'), _x = _w.next(); !_x.done; _x = _w.next()) {
                 var id = _x.value;
-                elements[id].style.left = styleMeasure(w - 2.5 * t);
+                elements[id].style.left = styleMeasure(w - 3 * t);
             }
         }
         catch (e_10_1) { e_10 = { error: e_10_1 }; }
@@ -598,9 +599,7 @@ var SevenSegCellComponent = /** @class */ (function () {
             }
             finally { if (e_14) throw e_14.error; }
         }
-        console.log([this.spacing, this.thickness, this.horizontalH, this.horizontalW, this.verticalW, this.verticalH]);
         elements[','].style.top = styleMeasure(h - t);
-        console.log('style changed');
     };
     /**
      * @param {?} s
@@ -631,7 +630,7 @@ var SevenSegCellComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'lib-seven-seg-cell',
                     template: "<div #bed class=\"bed\">\n  <div class=\"seg horizontal\" id=\"A\" [class.on]=\"segState['A']\">\n    <lib-hexagon [width]=\"horizontalW\" [height]=\"horizontalH\" [color]=\"color\" [spacing]=\"spacing\"></lib-hexagon>\n  </div>\n  <div class=\"seg vertical\" id=\"B\" [class.on]=\"segState['B']\">\n    <lib-hexagon [width]=\"verticalW\" [height]=\"verticalH\" [color]=\"color\" [spacing]=\"spacing\"></lib-hexagon>\n  </div>\n  <div class=\"seg vertical\" id=\"C\" [class.on]=\"segState['C']\">\n    <lib-hexagon [width]=\"verticalW\" [height]=\"verticalH\" [color]=\"color\" [spacing]=\"spacing\"></lib-hexagon>\n  </div>\n  <div class=\"seg horizontal\" id=\"D\" [class.on]=\"segState['D']\">\n    <lib-hexagon [width]=\"horizontalW\" [height]=\"horizontalH\" [color]=\"color\" [spacing]=\"spacing\"></lib-hexagon>\n  </div>\n  <div class=\"seg vertical\" id=\"E\" [class.on]=\"segState['E']\">\n    <lib-hexagon [width]=\"verticalW\" [height]=\"verticalH\" [color]=\"color\" [spacing]=\"spacing\"></lib-hexagon>\n  </div>\n  <div class=\"seg vertical\" id=\"F\" [class.on]=\"segState['F']\">\n    <lib-hexagon [width]=\"verticalW\" [height]=\"verticalH\" [color]=\"color\" [spacing]=\"spacing\"></lib-hexagon>\n  </div>\n  <div class=\"seg horizontal\" id=\"G\" [class.on]=\"segState['G']\">\n    <lib-hexagon [width]=\"horizontalW\" [height]=\"horizontalH\" [color]=\"color\" [spacing]=\"spacing\"></lib-hexagon>\n  </div>\n  <div class=\"seg dot\" id=\".\" [class.on]=\"segState['.']\"></div>\n  <div class=\"seg colon\" id=\":\" [class.on]=\"segState[':']\"></div>\n  <div class=\"seg comma\" id=\",\" [class.on]=\"segState[',']\"></div>\n</div>\n",
-                    styles: ["div.bed{position:relative;display:inline-block;top:0;left:0;width:30px;height:40px}div.seg{position:absolute;display:block;background-color:#800;visibility:hidden}div.horizontal{width:20px;height:6px;left:0}div.vertical{width:6px;height:20px}div#A{top:0;left:0}div#B{left:14px;top:0}div#C{left:14px;top:14px}div#E,div#G{left:0;top:14px}div#D{left:0;top:28px}div#F{left:0;top:0}div.dot{top:28px;left:21.5px;width:6px;height:6px}div.colon{top:14px;left:21.5px;width:6px;height:6px}div.comma{top:34px;left:24px;width:3px;height:6px}div.on{visibility:visible}"]
+                    styles: ["div.bed{position:relative;display:inline-block;text-align:left;top:0;left:0;width:30px;height:40px}div.seg{position:absolute;display:block;background-color:#800;visibility:hidden}div.horizontal{width:20px;height:6px;left:0}div.vertical{width:6px;height:20px}div#A{top:0;left:0}div#B{left:14px;top:0}div#C{left:14px;top:14px}div#E,div#G{left:0;top:14px}div#D{left:0;top:28px}div#F{left:0;top:0}div.dot{top:28px;left:21.5px;width:6px;height:6px}div.colon{top:14px;left:21.5px;width:6px;height:6px}div.comma{top:34px;left:24px;width:3px;height:6px}div.on{visibility:visible}"]
                 }] }
     ];
     /** @nocollapse */
@@ -656,14 +655,33 @@ var SevenSegCellComponent = /** @class */ (function () {
  */
 var HexagonComponent = /** @class */ (function () {
     function HexagonComponent() {
-        this.s = 0;
         this.color = 'black';
     }
+    Object.defineProperty(HexagonComponent.prototype, "spacing", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.s;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this.s = value;
+            this.fit();
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(HexagonComponent.prototype, "width", {
         get: /**
          * @return {?}
          */
-        function () { return this.w; },
+        function () {
+            return this.w;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -679,7 +697,9 @@ var HexagonComponent = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this.h; },
+        function () {
+            return this.h;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -699,11 +719,11 @@ var HexagonComponent = /** @class */ (function () {
      */
     function () {
         /** @type {?} */
-        var w = this.w;
+        var w = this.width;
         /** @type {?} */
-        var h = this.h;
+        var h = this.height;
         /** @type {?} */
-        var s = this.s;
+        var s = this.spacing * Math.sqrt(2);
         /** @type {?} */
         var sw;
         /** @type {?} */
@@ -718,8 +738,7 @@ var HexagonComponent = /** @class */ (function () {
         var y1;
         /** @type {?} */
         var t;
-        if (w < h) // vertical
-         {
+        if (w < h) { // vertical
             t = w / 2;
             x0 = -t;
             x1 = t;
@@ -744,7 +763,7 @@ var HexagonComponent = /** @class */ (function () {
         this.y1 = y1;
         this.sw = sw;
         this.sh = sh;
-        // console.log({w: w,h: h,t: t,x0: x0,y0: y0,x1: x1,y1: y1});
+        console.log({ w: w, h: h, t: t, s: s });
     };
     /**
      * @return {?}
@@ -758,19 +777,56 @@ var HexagonComponent = /** @class */ (function () {
     HexagonComponent.decorators = [
         { type: Component, args: [{
                     selector: 'lib-hexagon',
-                    template: "<div [style.borderColor]=\"color\" class=\"box\"\n     [ngStyle]=\"{width: w + 'px', height: h + 'px'}\" >\n  <div #s0 [style.top.px]=\"y0\" [style.left.px]=\"x0\"\n       class='vis'[class.vertical0]=\"(w < h)\" [class.horizontal0]=\"(w > h)\"\n       [ngStyle]=\"{top: (y0)+'px', left: (x0)+'px',\n       width:(sw)+'px',height:(sh)+'px', 'border-width': t+'px'}\"\n  ></div>\n  <div [style.top.px]=\"y1\" [style.left.px]=\"x1\"\n       class='vis' [class.vertical1]=\"(w < h)\" [class.horizontal1]=\"(w > h)\"\n       [ngStyle]=\"{top: (y1)+'px', left: (x1)+'px',\n       width:(sw)+'px',height:(sh)+'px', 'border-width': t+'px'}\"\n  ></div>\n</div>\n",
+                    template: "<div [style.borderColor]=\"color\" class=\"box\"\n     [ngStyle]=\"{width: w + 'px', height: h + 'px'}\">\n  <div #s0 [style.top.px]=\"y0\" [style.left.px]=\"x0\"\n       class='vis' [class.vertical0]=\"(w < h)\" [class.horizontal0]=\"(w > h)\"\n       [ngStyle]=\"{top: (y0)+'px', left: (x0)+'px',\n       width:(sw)+'px',height:(sh)+'px', 'border-width': t+'px'}\"\n  ></div>\n  <div [style.top.px]=\"y1\" [style.left.px]=\"x1\"\n       class='vis' [class.vertical1]=\"(w < h)\" [class.horizontal1]=\"(w > h)\"\n       [ngStyle]=\"{top: (y1)+'px', left: (x1)+'px',\n       width:(sw)+'px',height:(sh)+'px', 'border-width': t+'px'}\"\n  ></div>\n</div>\n",
                     styles: ["div.vis{border-style:solid;border-color:transparent;position:absolute}div.vertical0{left:-50%;border-right-color:inherit}div.vertical1{left:50%;border-left-color:inherit}div.horizontal0{top:-50%;border-bottom-color:inherit}div.horizontal1{top:50%;border-top-color:inherit}div.box{position:relative;display:inline-block;top:0;left:0;overflow:unset;vertical-align:top}"]
                 }] }
     ];
     /** @nocollapse */
     HexagonComponent.ctorParameters = function () { return []; };
     HexagonComponent.propDecorators = {
-        s: [{ type: Input, args: ['spacing',] }],
         color: [{ type: Input, args: ['color',] }],
+        spacing: [{ type: Input, args: ['spacing',] }],
         width: [{ type: Input, args: ['width',] }],
         height: [{ type: Input, args: ['height',] }]
     };
     return HexagonComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var SegSettingsComponent = /** @class */ (function () {
+    function SegSettingsComponent() {
+        this.thickness = 6;
+        this.spacing = 1;
+        this.count = 20;
+        this.chars = '7-seg. display';
+        this.color = '#f00';
+        this.width = 40;
+        this.height = 60;
+    }
+    /**
+     * @return {?}
+     */
+    SegSettingsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+    };
+    SegSettingsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'lib-seg-settings',
+                    template: "<table>\n  <tr>\n    <td>Sample sharacters</td>\n    <td>\n      <input type=\"text\" [(ngModel)]=\"chars\" />\n    </td>\n  </tr>\n  <tr>\n    <td>Color</td>\n    <td>\n      <input type=\"text\" [(ngModel)]=\"color\" />\n    </td>\n  </tr>\n  <tr>\n    <td>Length</td>\n    <td>\n      <input type=\"number\"  min=\"0\" max=\"1000\" [(ngModel)]=\"count\" />\n    </td>\n  </tr>\n  <tr>\n    <td>Thickness</td>\n    <td>\n      <input type=\"number\" min=\"0\" max=\"1000\" [(ngModel)]=\"thickness\" />\n    </td>\n  </tr>\n  <tr>\n    <td>Spacing</td>\n    <td>\n      <input type=\"number\" min=\"0\" max=\"1000\" [(ngModel)]=\"spacing\" />\n    </td>\n  </tr>\n  <tr>\n    <td>Width</td>\n    <td>\n      <input type=\"number\" min=\"0\" max=\"1000\" [(ngModel)]=\"width\" />\n    </td>\n  </tr>\n  <tr>\n    <td>Height</td>\n    <td>\n      <input type=\"number\" min=\"0\" max=\"1000\" [(ngModel)]=\"height\" />\n    </td>\n  </tr>\n</table>\n\n<div > {{count}} chars from {{chars}}, displayed in color {{color}}</div>\n<div class=\"display\">\n    <lib-seven-seg [thickness]=\"thickness\" [spacing]=\"spacing\" [char-height]=\"height\" [char-width]=\"width\" [chars]=\"chars\" [count]=\"count\" [color]=\"color\"></lib-seven-seg>\n</div>\n<!--\n<div *ngFor=\"let p of [{'w':20,'h':50},{'w':4,'h':39},{'w':90,'h':13}]\">\n  <lib-hexagon [width]=\"p.w\" [height]=\"p.h\" color=\"orange\"></lib-hexagon>\n  width: {{p.w}}, height: {{p.h}};\n</div>\n-->\n",
+                    styles: ["div.display{background-color:transparent;border:2px #000;display:block}input[type=number]{text-align:right}table{background-color:#dfb}"]
+                }] }
+    ];
+    /** @nocollapse */
+    SegSettingsComponent.ctorParameters = function () { return []; };
+    SegSettingsComponent.propDecorators = {
+        b1: [{ type: ViewChild, args: ['box1',] }]
+    };
+    return SegSettingsComponent;
 }());
 
 /**
@@ -782,14 +838,23 @@ var SevenSegModule = /** @class */ (function () {
     }
     SevenSegModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [SevenSegComponent,
+                    declarations: [
+                        SevenSegComponent,
                         SevenSegDigitComponent,
                         SevenSegCellComponent,
-                        HexagonComponent],
-                    imports: [
-                        CommonModule
+                        HexagonComponent,
+                        SegSettingsComponent
                     ],
-                    exports: [SevenSegComponent, SevenSegCellComponent, HexagonComponent]
+                    imports: [
+                        CommonModule,
+                        FormsModule
+                    ],
+                    exports: [
+                        SevenSegComponent,
+                        SevenSegCellComponent,
+                        HexagonComponent,
+                        SegSettingsComponent
+                    ]
                 },] }
     ];
     return SevenSegModule;
@@ -805,6 +870,6 @@ var SevenSegModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { SevenSegModule, SevenSegComponent, SevenSegDigitComponent, SevenSegCellComponent, HexagonComponent };
+export { SevenSegModule, SevenSegComponent, SevenSegDigitComponent, SevenSegCellComponent, HexagonComponent, SegSettingsComponent as ɵa };
 
 //# sourceMappingURL=seven-seg.js.map

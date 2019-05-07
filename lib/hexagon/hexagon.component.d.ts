@@ -1,11 +1,12 @@
 import { OnInit } from '@angular/core';
 export declare class HexagonComponent implements OnInit {
-    s: number;
     color: string;
+    spacing: number;
     width: number;
     height: number;
     h: number;
     w: number;
+    s: number;
     t: number;
     sw: number;
     sh: number;
